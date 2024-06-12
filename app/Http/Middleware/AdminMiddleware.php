@@ -19,7 +19,7 @@ class AdminMiddleware
   {
 
     if (Auth::check()) {
-      $userRoles = DB::table('model_has_roles')->join('roles', 'model_has_roles.role_id', '=', 'roles.id')->first();
+      $userRoles = DB::table('model_has_roles')->join('roles', 'model_has_roles.role_id', '=', 'roles.id')->where('model_has_roles.model_id', '=', Auth::id())->first();
       if ($userRoles->name == Auth::user()->role && Auth::user()->status == 1) {
         return $next($request);
       } elseif (Auth::user()->status == 5) {

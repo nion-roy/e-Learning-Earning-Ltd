@@ -3,7 +3,6 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Artisan;
 use RealRashid\SweetAlert\Facades\Alert;
 

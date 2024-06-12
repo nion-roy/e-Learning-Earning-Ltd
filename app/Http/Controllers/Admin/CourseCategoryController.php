@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\CourseCategory;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Course\CourseCategoryRequest;
 use App\Repositories\Interfaces\CourseCategoryRepositoryInterface;
@@ -46,7 +47,7 @@ class CourseCategoryController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show(CourseCategory $courseCategory)
   {
     //
   }
@@ -54,27 +55,27 @@ class CourseCategoryController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(CourseCategory $courseCategory)
   {
-    $category = $this->courseCategoryRepository->getById($id);
+    $category = $this->courseCategoryRepository->getById($courseCategory->id);
     return view('admin.course.category.edit', compact('category'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(CourseCategoryRequest $request, string $id)
+  public function update(CourseCategoryRequest $request, CourseCategory $courseCategory)
   {
-    $this->courseCategoryRepository->update($id, $request->validated());
+    $this->courseCategoryRepository->update($courseCategory->id, $request->validated());
     return redirect()->back()->withSuccess('Course category update successfull.');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(CourseCategory $courseCategory)
   {
-    $this->courseCategoryRepository->destroy($id);
+    $this->courseCategoryRepository->destroy($courseCategory->id);
     return redirect()->back()->withSuccess('Course category delete successfull.');
   }
 }

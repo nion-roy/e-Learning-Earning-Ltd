@@ -50,7 +50,7 @@
 						<tbody>
 							@foreach ($categories as $key => $category)
 								<tr>
-									<td>{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</td>
+									<td>{{ getStrPad($key + 1) }}</td>
 									<td>{{ $category->category_name }}</td>
 									<td>{{ $category->user->name }}</td>
 									<td>{{ $category->created_at->format('d-M-Y') }}</td>

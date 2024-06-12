@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\UserSoftware;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\UserSoftwareRequest;
 use App\Repositories\Interfaces\UserSoftwareRepositoryInterface;
@@ -43,7 +44,7 @@ class UserSoftwareController extends Controller
   /**
    * Display the specified resource.
    */
-  public function show(string $id)
+  public function show(UserSoftware $userSoftware)
   {
     //
   }
@@ -51,27 +52,27 @@ class UserSoftwareController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(UserSoftware $userSoftware)
   {
-    $software = $this->UserSoftwareRepository->getById($id);
+    $software = $this->UserSoftwareRepository->getById($userSoftware->id);
     return view('admin.user-software.edit', compact('software'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(UserSoftwareRequest $request, string $id)
+  public function update(UserSoftwareRequest $request, UserSoftware $userSoftware)
   {
-    $this->UserSoftwareRepository->update($id, $request->validated());
+    $this->UserSoftwareRepository->update($userSoftware->id, $request->validated());
     return redirect()->back()->withSuccess('User software update successfull.');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(UserSoftware $userSoftware)
   {
-    $this->UserSoftwareRepository->destroy($id);
+    $this->UserSoftwareRepository->destroy($userSoftware->id);
     return redirect()->back()->withSuccess('User software delete successfull.');
   }
 }

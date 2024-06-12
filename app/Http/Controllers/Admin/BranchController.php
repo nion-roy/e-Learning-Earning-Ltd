@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Admin;
 
+use App\Models\Branch;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\BranchRequest;
 use App\Repositories\Interfaces\BranchRepositoryInterface;
@@ -54,27 +55,27 @@ class BranchController extends Controller
   /**
    * Show the form for editing the specified resource.
    */
-  public function edit(string $id)
+  public function edit(Branch $branch)
   {
-    $branch = $this->branchRepository->getById($id);
+    $branch = $this->branchRepository->getById($branch->id);
     return view('admin.branch.edit', compact('branch'));
   }
 
   /**
    * Update the specified resource in storage.
    */
-  public function update(BranchRequest $request, string $id)
+  public function update(BranchRequest $request, Branch $branch)
   {
-    $this->branchRepository->update($id, $request->validated());
+    $this->branchRepository->update($branch->id, $request->validated());
     return redirect()->back()->withSuccess('Branch update successfull.');
   }
 
   /**
    * Remove the specified resource from storage.
    */
-  public function destroy(string $id)
+  public function destroy(Branch $branch)
   {
-    $this->branchRepository->destroy($id);
+    $this->branchRepository->destroy($branch->id);
     return redirect()->back()->withSuccess('Branch delete successfull.');
   }
 }

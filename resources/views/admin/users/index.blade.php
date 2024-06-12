@@ -54,8 +54,15 @@
 						<tbody>
 							@foreach ($users as $key => $user)
 								<tr>
-									<td>{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</td>
-									<td>{{ $user->name }}</td>
+									<td>{{ getStrPad($key + 1) }}</td>
+									<td>
+										@if ($user->image !== 'user.png')
+											<img src="{{ asset('storage/users/' . $user->image) }}" alt="{{ $user->name }}" class="img-thumbnail rounded-circle border me-2" width="30" height="30">
+										@else
+											<img src="{{ asset('default/null.png') }}" alt="{{ $user->name }}" class="img-thumbnail rounded-circle border me-2" width="30" height="30">
+										@endif
+										{{ $user->name }}
+									</td>
 									<td>{{ $user->username }}</td>
 									<td>{{ $user->email }}</td>
 									<td>
