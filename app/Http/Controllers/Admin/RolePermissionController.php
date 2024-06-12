@@ -70,7 +70,6 @@ class RolePermissionController extends Controller
   {
     $role = Role::findOrFail($id);
     $permissions = Permission::get();
-    // $permissionRole = DB::table('role_has_permissions')->where('role_id', $id)->pluck('permission_id')->toArray();
     $permissionRole = DB::table('role_has_permissions')->where('role_has_permissions.role_id', $role->id)
       ->pluck('role_has_permissions.permission_id', 'role_has_permissions.permission_id')
       ->all();

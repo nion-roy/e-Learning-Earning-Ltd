@@ -32,7 +32,6 @@
 						<a href="{{ route('admin.user-softwares.create') }}" class="btn btn-success waves-effect"><i class="fas fa-plus-circle me-2"></i>Add Software</a>
 					</div>
 
-
 					@include('alert-message.alert-message')
 
 					<table id="datatable" class="table border table-striped align-middle w-100">
@@ -50,9 +49,9 @@
 						<tbody>
 							@foreach ($softwares as $key => $software)
 								<tr>
-									<td>{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</td>
+									<td>{{ getStrPad($key + 1) }}</td>
 									<td>{{ $software->software_name }}</td>
-									<td>{{ Str::limit($software->details ?? "Null", 40) }}</td>
+									<td>{{ Str::limit($software->details ?? 'Null', 40) }}</td>
 									<td>
 										@if ($software->image != 'user_software.png')
 											<img src="{{ asset('storage/user_software/' . $software->image ?? 'default/logo.png') }}" alt="{{ $software->name }}" width="30" height="30">

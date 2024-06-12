@@ -3,30 +3,33 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Models\User;
-use Illuminate\Support\Str;
-use Illuminate\Http\Request;
 use Spatie\Permission\Models\Role;
 use App\Http\Controllers\Controller;
-use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UserRequest;
+use App\Repositories\Interfaces\UserRepositoryInterface;
 
 class UserController extends Controller
 {
 
-  public function __construct()
+  protected $userRepository;
+
+  public function __construct(UserRepositoryInterface $userRepository)
   {
     $this->middleware('permission:view user|create user|update user|delete user', ['only' => ['index']]);
     $this->middleware('permission:create user', ['only' => ['create', 'store']]);
     $this->middleware('permission:update user', ['only' => ['edit', 'update']]);
     $this->middleware('permission:delete user', ['only' => ['destroy']]);
+
+    $this->userRepository = $userRepository;
   }
-  
+
 
   /**
    * Display a listing of the resource.
    */
   public function index()
   {
-    $users = User::orderByDesc('last_activity')->get();
+    $users = $this->userRepository->getAll();
     return view('admin.users.index', compact('users'));
   }
 
@@ -42,26 +45,9 @@ class UserController extends Controller
   /**
    * Store a newly created resource in storage.
    */
-  public function store(Request $request)
+  public function store(UserRequest $request)
   {
-    $request->validate([
-      'name' => 'required|string',
-      'username' => 'required|string|unique:users,username',
-      'email' => 'required|email|unique:users,email',
-      'role' => 'required',
-    ]);
-
-    $user = new User();
-    $user->name = $request->name;
-    $user->slug = Str::slug($user->name);
-    $user->username = $request->username;
-    $user->email = $request->email;
-    $user->role = $request->role;
-    $user->password = Hash::make(12345678);
-    $user->save();
-
-    $user->syncRoles($request->role);
-
+    $this->userRepository->create($request->validated());
     return redirect()->back()->withSuccess('User account created successfully.');
   }
 
@@ -86,24 +72,9 @@ class UserController extends Controller
   /**
    * Update the specified resource in storage.
    */
-  public function update(Request $request, User $user)
+  public function update(UserRequest $request, User $user)
   {
-    $request->validate([
-      'name' => 'required|string',
-      'username' => 'required|string|unique:users,username,' . $user->id,
-      'email' => 'required|email|unique:users,email,' . $user->id,
-      'role' => 'required',
-    ]);
-
-    $user->name = $request->name;
-    $user->slug = Str::slug($user->name);
-    $user->username = $request->username;
-    $user->email = $request->email;
-    $user->role = $request->role;
-    $user->update();
-
-    $user->syncRoles($request->role);
-
+    $this->userRepository->update($user->id, $request->validated());
     return redirect()->back()->withSuccess('User account update successfully.');
   }
 
@@ -112,6 +83,7 @@ class UserController extends Controller
    */
   public function destroy(User $user)
   {
-    //
+    $this->userRepository->destroy($user->id);
+    return redirect()->back()->withSuccess('User account delete successfully.');
   }
 }

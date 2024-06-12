@@ -58,12 +58,19 @@
 
 						<div class="mb-3">
 							<label for="image" class="form-label">Image</label>
+							<div id="imagePreviewContainer" class="mb-2">
+								@if ($user->image !== 'user.png')
+									<img src="{{ asset('storage/users/' . $user->image) }}" alt="{{ $user->name }}" style="width: 60px; height: 60px; margin: 10px 0" class="border">
+								@else
+									<img src="{{ asset('default/null.png') }}" alt="{{ $user->name }}" style="width: 60px; height: 60px; margin: 10px 0" class="border">
+								@endif
+							</div>
 							<input type="file" name="image" class="form-control @error('image') is-invalid @enderror" id="image">
 							@error('image')
 								<div class="text-danger">{{ $message }}</div>
 							@enderror
 						</div>
-            
+
 						<div class="mb-3">
 							<label for="role" class="form-label">User Role</label>
 							<select name="role" id="role" class="form-control form-select @error('role') is-invalid @enderror">

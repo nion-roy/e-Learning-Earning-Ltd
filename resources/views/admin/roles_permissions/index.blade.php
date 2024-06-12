@@ -51,7 +51,7 @@
 						<tbody>
 							@foreach ($roles as $key => $role)
 								<tr>
-									<td>{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</td>
+									<td>{{ getStrPad($key + 1) }}</td>
 									<td>{{ $role->name }}</td>
 
 									<td>{{ $role->guard_name }}</td>

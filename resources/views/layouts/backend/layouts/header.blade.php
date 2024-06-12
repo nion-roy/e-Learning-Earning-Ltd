@@ -19,6 +19,13 @@
 				<i class="fa fa-fw fa-bars"></i>
 			</button>
 
+			<a href="{{ route('admin.clear.cache') }}">
+				<button class="btn btn-sm px-3 font-size-16 header-item waves-effect" id="vertical-menu-btn">
+					<i class="fas fa-sync"></i>
+					Clear Cache
+				</button>
+			</a>
+
 		</div>
 
 		<div class="d-flex">

@@ -44,8 +44,23 @@ Route::group(['as' => 'admin.', 'prefix' => $prefix, 'middleware' => 'admin'], f
 
 
 
-
-
+  Route::resource('category/partner', App\Http\Controllers\Admin\PartnerCategoryController::class, [
+    'names' => [
+      'index' => 'partner.category.index',
+      'create' => 'partner.category.create',
+      'store' => 'partner.category.store',
+      'show' => 'partner.category.show',
+      'edit' => 'partner.category.edit',
+      'update' => 'partner.category.update',
+      'destroy' => 'partner.category.destroy',
+    ]
+  ]);
+  Route::resource('all-partners', App\Http\Controllers\Admin\PartnerController::class);
+  
+  
+  Route::resource('testimonials', App\Http\Controllers\Admin\TestimonialController::class);
+  Route::resource('header-banners', App\Http\Controllers\Admin\HeaderSliderController::class);
+  Route::resource('popups', App\Http\Controllers\Admin\PopupController::class);
 
 
   Route::resource('users', App\Http\Controllers\Admin\UserController::class);
@@ -60,5 +75,4 @@ Route::group(['as' => 'admin.', 'prefix' => $prefix, 'middleware' => 'admin'], f
 
   // cache clear
   Route::get('clear-cache', [App\Http\Controllers\Admin\CacheController::class, 'clearCache'])->name('clear.cache');
-
 });

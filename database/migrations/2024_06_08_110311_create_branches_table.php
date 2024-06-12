@@ -17,8 +17,8 @@ return new class extends Migration
       $table->string('branch_name')->unique();
       $table->string('slug')->unique();
       $table->string('address')->nullable();
-      $table->integer('contact_1')->nullable();
-      $table->integer('contact_2')->nullable();
+      $table->string('contact_1')->nullable();
+      $table->string('contact_2')->nullable();
       $table->string('email_1')->nullable();
       $table->string('email_2')->nullable();
       $table->boolean('status')->default(true);

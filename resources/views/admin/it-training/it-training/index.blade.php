@@ -51,7 +51,7 @@
 						<tbody>
 							@foreach ($trainings as $key => $training)
 								<tr>
-									<td>{{ str_pad($key + 1, 2, '0', STR_PAD_LEFT) }}</td>
+									<td>{{ getStrPad($key + 1) }}</td>
 									<td>{{ $training->name }}</td>
 									<td>{{ $training->category->category_name }}</td>
 									<td>{{ Str::limit($training->details, 40) }}</td>

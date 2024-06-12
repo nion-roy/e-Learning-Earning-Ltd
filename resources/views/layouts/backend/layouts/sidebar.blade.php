@@ -42,14 +42,14 @@
 
 
 				<!-- Header section start -->
-				<li>
+				<li class="{{ request()->is($role . '/popups*') || request()->is($role . '/header-banners*') ? 'mm-active' : '' }}">
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
 						<i class="bx bx-bookmark"></i>
 						<span>Header Section</span>
 					</a>
 					<ul class="sub-menu mm-collapse">
-						<li><a href="javascript:void(0)">Popup</a></li>
-						<li><a href="javascript:void(0)">Header Banners</a></li>
+						<li><a class="{{ request()->is($role . '/popups*') ? 'active' : '' }}" href="{{ route('admin.popups.index') }}">Popup</a></li>
+						<li><a class="{{ request()->is($role . '/header-banners*') ? 'active' : '' }}" href="{{ route('admin.header-banners.index') }}">Header Banners</a></li>
 					</ul>
 				</li>
 				<hr class="my-1 border-dark">
@@ -65,7 +65,7 @@
 					<ul class="sub-menu mm-collapse">
 						<li><a href="javascript: void(0);">About Us</a></li>
 						<li><a href="javascript: void(0);">Trainers List</a></li>
-						<li><a href="javascript: void(0);">Testimonials</a></li>
+						<li><a href="{{ route('admin.testimonials.index') }}">Testimonials</a></li>
 						<li>
 							<a href="javascript: void(0);" class="has-arrow">Gallery</a>
 							<ul class="sub-menu mm-collapse">
@@ -107,14 +107,14 @@
 				<hr class="my-1 border-dark">
 
 
-				<li>
+				<li class="{{ request()->is($role . '/category/partner*') || request()->is($role . '/all-partners*') ? 'mm-active' : '' }}">
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
 						<i class="bx bx-bookmark"></i>
 						<span>Partners</span>
 					</a>
 					<ul class="sub-menu mm-collapse">
-						<li><a href="javascript:void(0)">Local Partners</a></li>
-						<li><a href="javascript:void(0)">Valued Partners</a></li>
+						<li><a class="{{ request()->is($role . '/category/partner*') ? 'active' : '' }}" href="{{ route('admin.partner.category.index') }}">Category</a></li>
+						<li><a class="{{ request()->is($role . '/all-partners*') ? 'active' : '' }}" href="{{ route('admin.all-partners.index') }}">Partners</a></li>
 					</ul>
 				</li>
 				<hr class="my-1 border-dark">
@@ -148,19 +148,12 @@
 				<!-- Regular training start -->
 				<li class="{{ request()->is($role . '/courses/categories*') ? 'mm-active' : '' }}">
 					<a href="javascript: void(0);" class="has-arrow waves-effect">
-						<i class="bx bx-detail"></i>
-						<span>Regular Training</span>
+						<i class="bx bx-bookmark"></i>
+						<span>Course or Training</span>
 					</a>
-					<ul class="sub-menu mm-collapse {{ request()->is($role . '/courses/categories*') ? 'mm-show' : '' }}">
-						<li class="{{ request()->is($role . '/courses/categories*') ? 'mm-active' : '' }}">
-							<a href="javascript: void(0);" class="has-arrow {{ request()->is($role . '/courses/categories*') ? 'mm-active' : '' }}">Regular Course</a>
-							<ul class="sub-menu mm-collapse {{ request()->is($role . '/courses/categories*') ? 'mm-show' : '' }}">
-								<li class="{{ request()->is($role . '/courses/categories*') ? 'mm-active' : '' }}">
-									<a href="{{ route('admin.category.course.index') }}" class="{{ request()->is($role . '/courses/categories*') ? 'active' : '' }}">Category</a>
-								</li>
-								<li><a href="javascript: void(0);">All Course</a></li>
-							</ul>
-						</li>
+					<ul class="sub-menu mm-collapse">
+						<li><a class="{{ request()->is($role . '/courses/categories*') ? 'active' : '' }}" href="{{ route('admin.category.course.index') }}">Category</a></li>
+						<li><a href="javascript:void(0)">All Courses</a></li>
 						<li><a href="javascript:void(0)">Polytechnic Industrial Training</a></li>
 						<li><a href="javascript:void(0)">Language Training</a></li>
 					</ul>
@@ -189,19 +182,6 @@
 						<i class="bx bxs-map-pin"></i>
 						<span>Branches</span>
 					</a>
-				</li>
-				<hr class="my-1 border-dark">
-
-
-				<li>
-					<a href="javascript: void(0);" class="has-arrow waves-effect">
-						<i class="fas fa-users"></i>
-						<span>Success Students</span>
-					</a>
-					<ul class="sub-menu mm-collapse">
-						<li><a href="javascript:void(0)">Category</a></li>
-						<li><a href="javascript:void(0)">Student Lists</a></li>
-					</ul>
 				</li>
 				<hr class="my-1 border-dark">
 

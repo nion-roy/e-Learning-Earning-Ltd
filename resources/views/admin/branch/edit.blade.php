@@ -62,7 +62,7 @@
 									<div class="col-md-12">
 										<div class="form-group mb-3">
 											<label for="contact_1" class="form-label">Contact One</label>
-											<input type="number" name="contact_1" class="form-control @error('contact_1') is-invalid @enderror" id="contact_1" placeholder="Enter contact number" value="0{{ $branch->contact_1 }}">
+											<input type="number" name="contact_1" class="form-control @error('contact_1') is-invalid @enderror" id="contact_1" placeholder="Enter contact number" value="{{ $branch->contact_1 }}">
 											@error('contact_1')
 												<div class="text-danger">{{ $message }}</div>
 											@enderror
@@ -74,7 +74,7 @@
 									<div class="col-md-12">
 										<div class="form-group mb-3">
 											<label for="contact_2" class="form-label">Contact Two</label>
-											<input type="number" name="contact_2" class="form-control @error('contact_2') is-invalid @enderror" id="contact_2" placeholder="Enter contact number" value="{{ $branch->contact_2 ? '0' . $branch->contact_2 : '' }}">
+											<input type="number" name="contact_2" class="form-control @error('contact_2') is-invalid @enderror" id="contact_2" placeholder="Enter contact number" value="{{ $branch->contact_2 }}">
 
 											@error('contact_2')
 												<div class="text-danger">{{ $message }}</div>

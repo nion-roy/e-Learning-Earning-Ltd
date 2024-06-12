@@ -14,6 +14,30 @@ if (!function_exists('getSetting')) {
 // Setting Function
 
 
+// Partner Category Count Function
+if (!function_exists('getPartnerCategoryCount')) {
+  function getPartnerCategoryCount($id)
+  {
+    $partnerCount = App\Models\Partner::where('category_id', $id)->count();
+    return $partnerCount;
+  }
+}
+// Partner Category Count Function
+
+
+// Str Pad Left Function
+if (!function_exists('getStrPad')) {
+  function getStrPad($value)
+  {
+    return str_pad($value, 2, '0', STR_PAD_LEFT);
+  }
+}
+// Str Pad Left Function
+
+
+
+
+
 if (!function_exists('getAuthSlug')) {
   function getAuthSlug()
   {
